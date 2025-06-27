@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para o Amor da Minha Vida 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #ffd6e8;
+      color: #333;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: background 1s ease;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 150px;
+      background: #ffb6c1;
+      border: 4px solid #ff69b4;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ff69b4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+
+    .envelope::before {
+      content: "💌";
+      font-size: 40px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px #ff69b4; }
+      50% { transform: scale(1.05); box-shadow: 0 0 25px #ff69b4; }
+    }
+
+    .fire {
+      animation: burn 1.5s forwards;
+    }
+
+    @keyframes burn {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: scale(0.3) rotate(720deg); opacity: 0; }
+    }
+
+    .card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 90%;
+      background: #fff0f5;
+      border-radius: 20px;
+      padding: 30px;
+      border: 3px dashed #ff69b4;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      animation: fadeIn 2s ease forwards;
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ff1493;
+    }
+
+    .card p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .heart {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 30px;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .arrow {
+      margin-top: 25px;
+      font-size: 36px;
+      color: #ff69b4;
+      animation: bounce 1s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .cinema-mode {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .cinema-mode h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #ff69b4;
+      animation: pulse 1.5s infinite;
+    }
+
+    video {
+      max-width: 90%;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="envelope" class="envelope" title="Clique para abrir"></div>
+
+  <div id="card" class="card">
+    <div class="heart">💖</div>
+    <h2>Uma cartinha pra você 💌</h2>
+    <p>
+      Oi meu amor! ❤️<br><br>
+      Você é meu mundo, a razão do meu sorriso bobo e da ansiedade de chegar logo.<br>
+      Cada dia contigo é uma nova história de amor que eu quero viver pra sempre, nem ferrando que iria perder a chance de ficar agarrado com você nesse friozinho.<br><br>
+      Agora relaxa e fica bem aconchegada na cama nos braços do seu Sapão, porque:
+    </p>
+    <div class="arrow" onclick="startCinema()">⬇️</div>
+  </div>
+
+  <div id="cinema" class="cinema-mode" style="display: none;">
+    <h1>HORA DO CINEMINHA 🍿🎬</h1>
+    <video id="movie" controls>
+      <source src="http://techon.one:80/movie/15127130/05940056/250373.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const card = document.getElementById('card');
+    const cinema = document.getElementById('cinema');
+
+    envelope.addEventListener('click', () => {
+      envelope.classList.add('fire');
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        card.style.display = 'flex';
+      }, 1500);
+    });
+
+    function startCinema() {
+      document.body.style.background = '#000';
+      card.style.display = 'none';
+      cinema.style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
