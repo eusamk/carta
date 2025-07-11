@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Convite RockYou</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: linear-gradient(to bottom, #f9f9f9, #eaeaea);
@@ -18,35 +14,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+      position: relative;
     }
 
     .card {
       width: 90%;
       max-width: 380px;
-      height: 220px;
       background: white;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       padding: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       text-align: center;
       opacity: 0;
       transform: scale(0.8);
       animation: showCard 1s ease forwards;
+      z-index: 2;
     }
 
     @keyframes showCard {
-      0% {
-        opacity: 0;
-        transform: scale(0.8) translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     h1 {
@@ -58,19 +46,98 @@
     p {
       font-size: 1rem;
       color: #555;
+      margin-bottom: 20px;
     }
 
     .emoji {
       font-size: 2rem;
       margin-bottom: 10px;
     }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .overlay {
+      background-color: black;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10;
+      display: none;
+    }
+
+    .sad-face {
+      position: absolute;
+      font-size: 2rem;
+      animation: bounce 1.5s infinite;
+      color: white;
+    }
+
+    @keyframes bounce {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-30px); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
+
   <div class="card">
     <div class="emoji">🍿🍦</div>
     <h1>Hoje tem RockYou & Filme!</h1>
-    <p>Prepare-se para uma explosão de sabor com RockYou e uma sessão de cinema imperdível.</p>
+    <p>Quer curtir um RockYou e assistir um filme comigo?</p>
+    <div class="buttons">
+      <button class="yes" onclick="enviarWhatsApp()">Sim</button>
+      <button class="no" onclick="mostrarSpam()">Não</button>
+    </div>
   </div>
+
+  <div class="overlay" id="spamOverlay"></div>
+
+  <script>
+    function enviarWhatsApp() {
+      const numero = "5511912345678"; // Altere para seu número com DDI
+      const mensagem = "Aceitei o convite RockYou! 🎬🍦";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.location.href = url;
+    }
+
+    function mostrarSpam() {
+      const overlay = document.getElementById('spamOverlay');
+      overlay.style.display = 'block';
+
+      for (let i = 0; i < 30; i++) {
+        const face = document.createElement('div');
+        face.className = 'sad-face';
+        face.innerText = '😢';
+
+        face.style.top = Math.random() * 90 + '%';
+        face.style.left = Math.random() * 90 + '%';
+        face.style.animationDelay = `${Math.random() * 2}s`;
+        overlay.appendChild(face);
+      }
+    }
+  </script>
 </body>
 </html>
